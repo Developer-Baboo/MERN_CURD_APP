@@ -31,7 +31,7 @@ exports.create = (req,res)=>{
 
 }
 
-// retrieve and return all users/ retrive and return a single user
+// retrieve and return all users/ retrieve and return a single user
 exports.find = (req, res)=>{
 
     if(req.query.id){
@@ -55,14 +55,14 @@ exports.find = (req, res)=>{
                 res.send(user)
             })
             .catch(err => {
-                res.status(500).send({ message : err.message || "Error Occurred while retriving user information" })
+                res.status(500).send({ message : err.message || "Error Occurred while retrieving user information" })
             })
     }
 
     
 }
 
-// Update a new idetified user by user id
+// Update a new identified user by user id
 exports.update = (req, res)=>{
     if(!req.body){
         return res

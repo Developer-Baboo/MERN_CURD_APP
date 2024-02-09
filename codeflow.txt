@@ -1,0 +1,87 @@
+npm init
+npm i express morgan nodemon ejs body-parser dotenv  mongoose axios
+
+start: nodemon server.js
+margin : help to log the message every time when we make a request 
+nodemon: allows us to restart the server automatically when we make changes in the project
+ejs: template engine allows use to create dynamic html 
+body-parser: allows us to s serialize the data and access the form data using body property
+dotenv: modules allows you to separate the secret from your source code 
+ 
+
+npm start
+
+
+In a typical Node.js application, the files you mentioned could serve different purposes:
+
+1. **services/render.js**: This file likely contains code related to rendering views or templates. It might contain functions or classes responsible for rendering HTML pages, often using a templating engine like EJS or Pug. It could handle tasks such as assembling data with templates and sending HTML responses to clients.
+
+2. **routes/router.js**: This file is likely part of the application's routing system. It would define and configure the routes for different endpoints of the web application. It could use a library like Express.js to define routes, handle HTTP requests, and send responses. This file might import controllers or middleware functions to handle specific requests.
+
+3. **server.js**: This file is typically the entry point of the Node.js application. It sets up the HTTP server, configures middleware, and starts listening for incoming requests. It may also import the router file to connect the defined routes to the server. Additionally, it might handle any necessary setup tasks like connecting to a database or initializing other services.
+
+4. **.ejs file**: This file likely represents an EJS (Embedded JavaScript) template file. EJS is a templating engine that allows embedding JavaScript code within HTML templates. These templates are then rendered on the server side to generate dynamic HTML content. The .ejs file might contain the structure of a webpage along with placeholders or EJS syntax for dynamic content insertion.
+
+Each of these files plays a specific role in a Node.js application, with services/render.js and routes/router.js handling application logic, server.js managing server setup and entry point, and .ejs files defining the structure and content of rendered views.
+
+
+
+
+Sure! Let's break down the flow of the provided Node.js application step by step:
+
+1. **Setting up the Environment**:
+   - The application starts by importing necessary modules like `express`, `dotenv`, `morgan`, `body-parser`, and `path`.
+   - `dotenv` is used to load environment variables from a `.env` file.
+   - `morgan` is a HTTP request logger middleware.
+   - `body-parser` is used to parse incoming request bodies.
+   - `path` provides utilities for working with file and directory paths.
+
+2. **Establishing Database Connection**:
+   - The `connectDB` function from `server/database/connection.js` file is called to establish a connection to MongoDB using Mongoose. This function is executed asynchronously.
+
+3. **Defining Routes**:
+   - The application defines routes using `express.Router()`.
+   - The routes are defined in `server/routes.router.js`. These routes handle both views (rendered using EJS) and API endpoints.
+   - The routes defined include:
+     - Root route (`/`)
+     - Route to add a user (`/add-user`)
+     - Route to update a user (`/update-user`)
+     - API endpoints for CRUD operations (`/api/users`)
+
+4. **Routing Logic**:
+   - The routes are defined with corresponding controller functions from `server/controller/controller.js` and view rendering functions from `server/services/render.js`.
+   - For example, when a user accesses the root route (`/`), the `homeRoutes` function from `server/services/render.js` is called. This function makes a GET request to the API endpoint `/api/users` to retrieve user data, then renders the `index.ejs` view with the retrieved data.
+   - Similar logic applies to other routes such as `/add-user` and `/update-user`.
+
+5. **Controller Functions**:
+   - Controller functions defined in `server/controller/controller.js` handle CRUD operations for users.
+   - Functions like `create`, `find`, `update`, and `delete` interact with the MongoDB database using Mongoose models.
+
+6. **View Rendering**:
+   - Views are rendered using EJS templates.
+   - The `ejs` view engine is set up in `server.js`.
+   - Views are served using the `res.render()` method, passing data as needed.
+
+7. **Static Assets**:
+   - Static assets like CSS, images, and client-side JavaScript files are served using `express.static()` middleware.
+
+8. **Starting the Server**:
+   - The server is started by calling `app.listen()` on a specified port.
+   - In this case, it's either the port defined in the environment variables or port 8080.
+
+In summary, the application sets up the environment, establishes a database connection, defines routes for both views and API endpoints, handles CRUD operations using controller functions, renders views using EJS templates, serves static assets, and starts the server to listen for incoming requests.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
